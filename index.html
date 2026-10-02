@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Diego Umaña — Fotografía, Video y Contenido.">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>DIEGO UMAÑA — Fotografía · Video · Contenido</title>
+  <style>
+    :root{
+      --bg:#080808; --panel:#111; --panel2:#171717; --text:#f5f5f5;
+      --muted:#a7a7a7; --line:#2a2a2a; --accent:#ff6a00; --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+    a{color:inherit;text-decoration:none}
+    img,video{display:block;width:100%}
+    .wrap{width:min(calc(100% - 36px),var(--max));margin:auto}
+    .topbar{position:fixed;z-index:20;top:0;left:0;right:0;background:rgba(8,8,8,.72);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{height:62px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:900;letter-spacing:.08em;font-size:14px}
+    .navlinks{display:flex;gap:18px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#cfcfcf}
+    .navlinks a:hover{color:var(--accent)}
+    .menu{display:none}
+    .hero{min-height:100svh;display:grid;align-items:end;position:relative;overflow:hidden}
+    .hero-media{position:absolute;inset:0}
+    .hero-media img{height:100%;object-fit:cover;filter:brightness(.54)}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 20%,rgba(0,0,0,.88) 92%)}
+    .hero-content{position:relative;z-index:2;padding:110px 0 58px}
+    .year{font-size:clamp(13px,2vw,18px);font-weight:800;letter-spacing:.12em;color:var(--accent);margin-bottom:8px}
+    h1{font-size:clamp(52px,10vw,128px);line-height:.86;letter-spacing:-.06em;margin:0;max-width:950px}
+    .sub{font-size:clamp(16px,2vw,22px);margin:22px 0 0;color:#ddd}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid #444;padding:13px 18px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:12px;transition:.2s}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:#080808}
+    .btn:hover{transform:translateY(-2px)}
+    section{padding:92px 0;border-bottom:1px solid var(--line)}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}
+    .eyebrow{color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.15em}
+    h2{font-size:clamp(34px,6vw,68px);line-height:.95;margin:7px 0 0;letter-spacing:-.045em}
+    .section-note{color:var(--muted);max-width:430px;font-size:14px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .card{position:relative;overflow:hidden;background:var(--panel);border:1px solid #222;min-height:220px}
+    .card img{height:100%;min-height:260px;object-fit:cover;transition:transform .5s}
+    .card:hover img{transform:scale(1.035)}
+    .card.tall{grid-column:span 4;min-height:520px}
+    .card.wide{grid-column:span 8;min-height:360px}
+    .card.full{grid-column:1/-1;min-height:430px}
+    .tag{position:absolute;left:14px;bottom:14px;background:rgba(0,0,0,.75);padding:7px 10px;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .tag b{color:var(--accent)}
+    .video-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .video-card{background:var(--panel);border:1px solid #242424;padding:10px}
+    .video-card video{aspect-ratio:16/9;object-fit:cover;background:#000}
+    .video-meta{padding:14px 4px 4px;display:flex;justify-content:space-between;gap:12px}
+    .video-meta span{font-size:12px;color:var(--muted)}
+    .about{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center}
+    .about-photo{background:#111;border:1px solid #242424}
+    .about-photo img{aspect-ratio:4/5;object-fit:cover}
+    .about-copy p{font-size:18px;color:#cfcfcf;max-width:650px}
+    .services{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .service{padding:26px;background:var(--panel);border:1px solid #242424;min-height:190px}
+    .service-num{color:var(--accent);font-size:12px;font-weight:900}
+    .service h3{margin:18px 0 8px;font-size:24px}
+    .service p{color:var(--muted);font-size:14px}
+    .cta{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
+    .cta h2{max-width:780px}
+    .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .contact{padding:24px;background:var(--panel);border:1px solid #242424}
+    .contact small{display:block;color:var(--accent);font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:9px}
+    .contact strong{font-size:18px;word-break:break-word}
+    footer{padding:28px 0;color:#777;font-size:12px;display:flex;justify-content:space-between;gap:20px}
+    .orange{color:var(--accent)}
+    @media(max-width:800px){
+      .navlinks{display:none}
+      .menu{display:block;color:#aaa;font-size:12px}
+      .hero-content{padding-bottom:40px}
+      .grid{gap:8px}
+      .card.tall,.card.wide,.card.full{grid-column:span 12;min-height:0}
+      .card.tall img,.card.wide img,.card.full img{aspect-ratio:4/5}
+      .video-grid,.about,.contact-grid{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr 1fr}
+      section{padding:72px 0}
+      .cta{grid-template-columns:1fr}
+    }
+    @media(max-width:520px){
+      .wrap{width:min(calc(100% - 24px),var(--max))}
+      h1{font-size:55px}
+      .services{grid-template-columns:1fr}
+      .hero-actions .btn{width:100%}
+      footer{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#inicio">DIEGO <span class="orange">UMAÑA</span></a>
+      <nav class="navlinks">
+        <a href="#portafolio">Portafolio</a><a href="#sobre-mi">Sobre mí</a><a href="#servicios">Servicios</a><a href="#contacto">Contacto</a>
+      </nav>
+      <span class="menu">SCROLL ↓</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-media"><img src="assets/hero.jpg" alt="Diego Umaña"></div>
+      <div class="wrap hero-content">
+        <div class="year">2026 / CREATIVE WORK</div>
+        <h1>DIEGO<br>UMAÑA</h1>
+        <p class="sub">Fotografía · Video · Contenido</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#portafolio">Ver portafolio</a>
+          <a class="btn" href="https://wa.me/50671298772" target="_blank" rel="noopener">Solicitar cotización</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="portafolio">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">02 / PORTAFOLIO</div><h2>Trabajo visual<br>que comunica.</h2></div>
+          <div class="section-note">Retratos, contenido para marcas, fotografía lifestyle y campañas visuales.</div>
+        </div>
+        <div class="grid">
+          <a class="card tall" href="assets/foto-01.jpg" target="_blank"><img src="assets/foto-01.jpg" alt="Fotografía lifestyle"><span class="tag"><b>01</b> Lifestyle</span></a>
+          <a class="card tall" href="assets/foto-03.jpg" target="_blank"><img src="assets/foto-03.jpg" alt="Retrato"><span class="tag"><b>02</b> Retrato</span></a>
+          <a class="card tall" href="assets/foto-06.jpg" target="_blank"><img src="assets/foto-06.jpg" alt="Contenido de marca"><span class="tag"><b>03</b> Marca</span></a>
+          <a class="card wide" href="assets/foto-04.jpg" target="_blank"><img src="assets/foto-04.jpg" alt="Contenido para producto"><span class="tag"><b>04</b> Producto / Campaña</span></a>
+          <a class="card wide" href="assets/foto-07.jpg" target="_blank"><img src="assets/foto-07.jpg" alt="Sesión editorial"><span class="tag"><b>05</b> Editorial</span></a>
+          <a class="card tall" href="assets/foto-05.jpg" target="_blank"><img src="assets/foto-05.jpg" alt="Fotografía urbana"><span class="tag"><b>06</b> Street</span></a>
+          <a class="card tall" href="assets/foto-08.jpg" target="_blank"><img src="assets/foto-08.jpg" alt="Contenido lifestyle"><span class="tag"><b>07</b> Lifestyle</span></a>
+          <a class="card tall" href="assets/foto-02.png" target="_blank"><img src="assets/foto-02.png" alt="Fotografía creativa"><span class="tag"><b>08</b> Creative</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="video">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">02.1 / VIDEO</div><h2>Movimiento<br>también cuenta.</h2></div>
+          <div class="section-note">Dos piezas de video seleccionadas para mostrar el trabajo audiovisual.</div>
+        </div>
+        <div class="video-grid">
+          <article class="video-card"><video controls preload="metadata" playsinline><source src="assets/video-01.mp4" type="video/mp4"></video><div class="video-meta"><strong>Video 01</strong><span>Contenido audiovisual</span></div></article>
+          <article class="video-card"><video controls preload="metadata" playsinline><source src="assets/video-02.mp4" type="video/mp4"></video><div class="video-meta"><strong>Video 02</strong><span>Contenido audiovisual</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre-mi">
+      <div class="wrap about">
+        <div class="about-photo"><img src="assets/hero.jpg" alt="Diego Umaña, creador audiovisual"></div>
+        <div class="about-copy">
+          <div class="eyebrow">03 / SOBRE MÍ</div>
+          <h2>Una mirada<br>para cada historia.</h2>
+          <p>Soy Diego Umaña, creador audiovisual especializado en fotografía, video y contenido para personas, eventos y marcas.</p>
+          <p>Mi objetivo es transformar momentos e ideas en contenido visual que conecte y comunique.</p>
+          <a class="btn" href="mailto:garitadiego74@gmail.com">Escribime</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">04 / SERVICIOS</div><h2>¿Qué podemos<br>crear?</h2></div>
+          <div class="section-note">Soluciones visuales pensadas para personas, eventos y marcas.</div>
+        </div>
+        <div class="services">
+          <article class="service"><div class="service-num">01</div><h3>Fotografía</h3><p>Retratos, lifestyle, producto, contenido para marcas y sesiones creativas.</p></article>
+          <article class="service"><div class="service-num">02</div><h3>Video</h3><p>Contenido vertical, reels, piezas audiovisuales y cobertura en video.</p></article>
+          <article class="service"><div class="service-num">03</div><h3>Eventos</h3><p>Registro visual de eventos y momentos que merecen quedar.</p></article>
+          <article class="service"><div class="service-num">04</div><h3>Marcas</h3><p>Contenido visual para comunicar productos, campañas y conceptos.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyecto">
+      <div class="wrap cta">
+        <div><div class="eyebrow">05 / ¿TENÉS UN PROYECTO?</div><h2>Hagamos que tu idea<br>se vea como la imaginaste.</h2></div>
+        <a class="btn primary" href="https://wa.me/50671298772?text=Hola%20Diego%2C%20vi%20tu%20portafolio%20y%20quiero%20cotizar%20un%20proyecto." target="_blank" rel="noopener">Solicitar cotización →</a>
+      </div>
+    </section>
+
+    <section id="redes">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">06 / REDES</div><h2>Seguime<br>por acá.</h2></div>
+        </div>
+        <div class="contact-grid">
+          <a class="contact" href="https://www.instagram.com/d.umana20/" target="_blank" rel="noopener"><small>Instagram</small><strong>@d.umana20</strong></a>
+          <a class="contact" href="https://wa.me/50671298772" target="_blank" rel="noopener"><small>WhatsApp</small><strong>+506 7129 8772</strong></a>
+          <a class="contact" href="mailto:garitadiego74@gmail.com"><small>Correo</small><strong>garitadiego74@gmail.com</strong></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">07 / CONTACTO</div><h2>Hablemos.</h2></div>
+          <div class="section-note">¿Tenés una idea, una fecha o una marca que querés llevar a otro nivel? Escribime.</div>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="https://wa.me/50671298772" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn" href="mailto:garitadiego74@gmail.com">Correo</a>
+          <a class="btn" href="https://www.instagram.com/d.umana20/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span>© 2026 DIEGO UMAÑA</span><span>Fotografía · Video · Contenido</span>
+  </footer>
+</body>
+</html>
